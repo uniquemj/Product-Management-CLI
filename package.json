@@ -1,0 +1,18 @@
+{
+  "name": "productmanagementclijs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "help":"node index.js help",
+    "list-product": "node index.js product list",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "nanoid": "^5.1.5"
+  }
+}

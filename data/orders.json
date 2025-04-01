@@ -1,0 +1,22 @@
+[
+    {
+        "o_id": "2531",
+        "userId": "user123",
+        "total": 297,
+        "timestamp": "2025-04-01T07:15:03.783Z",
+        "status": "Pending",
+        "items": [
+            {
+                "product": {
+                    "p_id": "9593",
+                    "name": "Body lotion",
+                    "price": "99.99",
+                    "description": "",
+                    "category": "",
+                    "inventory": 9
+                },
+                "quantity": 3
+            }
+        ]
+    }
+]
