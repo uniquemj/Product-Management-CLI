@@ -76,5 +76,7 @@ node index.js order create --userId=<userId>
 node index.js order list --userId=<userId>
 ```
 
-
+## Learning Resources Used
+- To understand more about CLI and on how to use and access command, I used following resource.
+    - [process](https://eytanmanor.medium.com/how-clis-in-node-js-actually-work-c26f913a335e)
 
