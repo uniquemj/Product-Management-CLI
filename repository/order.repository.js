@@ -67,8 +67,10 @@ const updateStatus = async(orderId, userId, status) =>{
         const orders = await readFileHelper(orderStorage)
         const orderIndex = orders.findIndex((item) => item.orderId == orderId)
         const userOrder = orders.filter((item) => item.userId ==userId)
-        userOrder['status'] = status
+        userOrder[0]['status'] = status
+        console.log(userOrder)
         orders[orderIndex] = userOrder[0]
+        console.log(orders)
         await writeFileHelper(orderStorage, orders)
         return "Status Updated"
     } catch (e) {

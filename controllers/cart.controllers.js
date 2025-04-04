@@ -47,6 +47,10 @@ const removeCartItem = async(args) =>{
 const cartTotal = async(args) =>{
     try{
         const {userId} = args
+        if(!userId){
+            console.log("User Id is required.")
+            return
+        }
         const result = await CartServices.cartTotal(userId)
         console.log("Cart total:", result)
     } catch(e){
