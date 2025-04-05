@@ -26,12 +26,17 @@ const add = async(item, quantity, userId) =>{
     const products = await ProductRepository.findAll()
     const productIndex = await products.findIndex((p)=>p.p_id == item.p_id)
 
+    const productInfo = {
+        p_id: products[productIndex].p_id,
+        name: products[productIndex].name,
+        price: products[productIndex].price
+    }
     // Defining Cart Item
     const cartItemInfo = {
         c_id: getRandomId(),
         userId: userId,
         items: [
-            {product:products[productIndex], quantity: parseInt(quantity)}
+            {product:productInfo, quantity: parseInt(quantity)}
         ]
     }
 
@@ -48,7 +53,7 @@ const add = async(item, quantity, userId) =>{
         // checks if user contain same product or not.
         if(user_cart_items.length == 0){  
             // when cart with userId doesn't contain same product
-            cartItems.items.push({product:products[productIndex], quantity: parseInt(quantity)})
+            cartItems.items.push({product:productInfo, quantity: parseInt(quantity)})
         } else {
             // when cart with userId contain same product
             const cartItemIndex = cartItems.items.findIndex((t) => t.product.p_id == item.p_id)

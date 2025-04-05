@@ -27,8 +27,11 @@ const createOrder = async(user_id) =>{
     const userCartItems = userCart[0].items
 
     // this code handles updating inventory for product
-    const updateProducts = userCartItems.map((item)=>{
+    userCartItems.forEach((item)=>{
         const productIndex = products.findIndex((p_item) =>p_item.p_id ==item.product.p_id)
+        if(products[productIndex].inventory < 1){
+            throw new Error("Product out of stock.")
+        }
         products[productIndex].inventory -= item.quantity
         return item
     })
@@ -37,7 +40,7 @@ const createOrder = async(user_id) =>{
     //this code handles updating cart info with latest product inventory info
     const updateCarts = userCartItems.map((item)=>{
         const productIndex = products.findIndex((p_item)=>p_item.p_id ==item.product.p_id)
-        item.product = products[productIndex]
+        item.product = {p_id:products[productIndex].p_id, name: products[productIndex].name, price: products[productIndex].price}
         return item
     })
 
@@ -66,11 +69,9 @@ const updateStatus = async(orderId, userId, status) =>{
     try{
         const orders = await readFileHelper(orderStorage)
         const orderIndex = orders.findIndex((item) => item.orderId == orderId)
-        const userOrder = orders.filter((item) => item.userId ==userId)
-        userOrder[0]['status'] = status
-        console.log(userOrder)
+        const userOrder = orders.find((item) => item.userId ==userId)
+        userOrder['status'] = status
         orders[orderIndex] = userOrder[0]
-        console.log(orders)
         await writeFileHelper(orderStorage, orders)
         return "Status Updated"
     } catch (e) {
